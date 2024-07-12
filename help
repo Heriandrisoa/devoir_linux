@@ -1,0 +1,56 @@
+Utilisation : tail [OPTION]... [FICHIER]...
+Afficher les 10 dernières lignes de chaque FICHIER sur la sortie standard.
+Avec plusieurs FICHIERs, écrire un en-tête donnant le nom avant chaque fichier.
+
+Sans FICHIER ou quand FICHIER est -, lire l'entrée standard.
+
+Les arguments obligatoires pour les options longues le sont aussi pour les
+options courtes.
+  -c, --bytes=[+]N         afficher les N derniers octets ; -c +N peut aussi
+                             être utilisé pour afficher les octets à partir du
+                             Nième de chaque fichier
+  -f, --follow[={name|descriptor}]
+                           afficher les données ajoutées au fur et à mesure
+                             que le fichier grandit ; sans argument, c’est
+                             équivalent à 'descriptor'
+  -F                       identique à --follow=name --retry
+  -n, --lines=[+]N         afficher les N dernières lignes, au lieu des 10
+                             dernières, -n +N pour afficher à partir de la Nième
+      --max-unchanged-stats=N
+                           avec l'option --follow=name, rouvrir un FICHIER qui
+                             n'a pas changé de taille après N itérations (5
+                             par défaut) afin de vérifier s'il a été délié ou
+                             renommé (c'est le cas habituellement des fichiers
+                             tournants de journalisation) ;
+                             avec inotify, cette option est rarement utilisée
+      --pid=PID            avec -f, terminer après la mort du PID
+  -q, --quiet, --silent    ne jamais afficher l'en-tête donnant les noms
+                             de fichiers
+      --retry              continuer d'essayer à ouvrir un fichier s’il est
+                             inaccessible
+  -s, --sleep-interval=N   avec -f, dort environ N secondes (1.0 par défaut)
+                             entre les itérations ; avec inotify et --pid=P,
+                             vérifier le processus P au moins une fois toutes
+                             les N secondes
+  -v, --verbose            afficher toujours les en-têtes des noms de fichier
+  -z, --zero-terminated    le délimiteur de lignes est l'octet NUL au lieu
+                            du saut de ligne
+      --help     afficher l'aide et quitter
+      --version  afficher des informations de version et quitter
+
+N peut avoir un suffixe multiplicateur :
+b 512, kB 1000, K 1024, MB 1000*1000, M 1024*1024,
+GB 1000*1000*1000, G 1024*1024*1024 et ainsi de suite pour T, P, E, Z et Y.
+
+Avec l'option --follow (-f), tail utilise par défaut le descripteur de fichier,
+lui permettant ainsi de suivre l'évolution du fichier ciblé même s'il change de
+nom. Ce comportement par défaut n'est pas désirable lorsqu'on souhaite suivre
+l'évolution d'un fichier à l'aide de son nom et non via le descripteur de
+fichier (par exemple lors de la rotation des journaux). Dans ce cas, utilisez
+--follow=name et tail suivra l'évolution du fichier en s'accommodant des
+changements de nom, des suppressions ou des créations.
+
+Aide en ligne de GNU coreutils : <https://www.gnu.org/software/coreutils/>
+Signalez les problèmes de traduction de « tail » à : <traduc@traduc.org>
+Documentation complète à : <https://www.gnu.org/software/coreutils/tail>
+ou disponible localement via: info '(coreutils) tail invocation'
